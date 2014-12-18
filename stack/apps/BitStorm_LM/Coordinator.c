@@ -66,6 +66,23 @@ static void appSendMessage(uint8_t *data, uint8_t size)
 	if (send_messages_paused)
 		return;
 
+
+// Uncomment to enable passhtrough
+/*
+	HAL_UartWriteByte('[');
+	HAL_UartWriteByte('R');
+	HAL_UartWriteByte('C');
+	HAL_UartWriteByte('V');
+	HAL_UartWriteByte(']');
+	HAL_UartWriteByte(' ');
+	for (uint8_t i=0;i<size;i++)
+	{
+		HAL_UartWriteByte(data[i]);
+	}
+	HAL_UartWriteByte('\n');
+		return;
+*/
+
 	// Calculate checksum...Couples us to AppMessage_t, but whatever...
 	msg->cs = 0;
 	for (uint8_t i=0;i<sizeof(AppMessage_t)-1;i++)
